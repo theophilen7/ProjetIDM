@@ -1,0 +1,62 @@
+grammar fr.n7.Td with org.eclipse.xtext.common.Terminals
+
+generate td "http://www.n7.fr/Td"
+
+TowerDefense returns TowerDefense:
+	{TowerDefense}
+	'TowerDefense'
+	name=STRING
+	'{'
+		parties+=Partie+
+		elementsJeu+=ElementJeu*
+	'}';
+
+Partie returns Partie:
+	{Partie}
+	'Partie'
+	name=STRING
+	'{'
+		terrain=[TerrainJeu]
+		listeNiveaux+=Niveau*
+		listeVagues+=Vague*
+	'}';
+
+Niveau returns Niveau:
+	{Niveau}
+	'Niveau'
+	name=STRING;
+
+Vague returns Vague:
+	{Vague}
+	'Vague';
+
+TerrainJeu returns TerrainJeu:
+	{TerrainJeu}
+	'Terrain'
+	L=INT
+	C=INT
+	'{'
+		cases+=ElementJeu*
+	'}';
+
+ElementJeu returns ElementJeu:
+	Mobile | Obstacle | Projectile | NatureTerrain;
+
+Mobile returns Mobile:
+	{Mobile}
+	'Mobile'
+;
+
+Obstacle returns Obstacle:
+	{Obstacle}
+	'Obstacle'
+;
+
+Projectile returns Projectile:
+	{Projectile}
+	'Projectile'
+;
+
+NatureTerrain returns NatureTerrain:
+	{NatureTerrain}
+	'NatureTerrain';
