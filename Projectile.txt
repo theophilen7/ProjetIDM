@@ -1,0 +1,35 @@
+grammar fr.n7.Td with org.eclipse.xtext.common.Terminals
+
+generate td "http://www.n7.fr/Td"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Mobile returns Mobile:
+	{Mobile}
+	'Mobile'
+	('uses' projectiles+=Projectile*)?
+	
+;
+
+Obstacle returns Obstacle:
+	{Obstacle} 
+	'Obstacle'
+	('uses' projectiles+=Projectile*)?
+;
+
+Projectile returns Projectile:
+	{Projectile}
+	'Projectile'
+	name = EString
+	portee = INT
+	masse = FLOAT
+	vitesse = INT
+	energie = FLOAT
+;
+	
+EString returns ecore::EString:
+	 STRING|ID
+;
+FLOAT returns ecore::EFloat:
+	INT'.'INT
+;
