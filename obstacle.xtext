@@ -1,0 +1,18 @@
+grammar fr.n7.Td with org.eclipse.xtext.common.Terminals
+
+generate td "http://www.n7.fr/Td"
+
+
+Obstacle returns Obstacle:
+	{Obstacle}
+	'Obstacle'
+	name=STRING
+	qteEM = INT
+	prj = Projectile
+	tactique = TACTIQUES
+;
+
+enum TACTIQUES: plusproche | plusfaible | plusfort;
+
+
+

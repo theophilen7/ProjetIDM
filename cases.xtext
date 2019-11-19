@@ -1,0 +1,11 @@
+grammar fr.n7.Td with org.eclipse.xtext.common.Terminals
+
+generate td "http://www.n7.fr/Td"
+
+	
+Case returns Case : 
+	{Case}
+	'Case'
+	Nature = NatureTerrain
+;
+
