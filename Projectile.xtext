@@ -21,10 +21,10 @@ Projectile returns Projectile:
 	{Projectile}
 	'Projectile'
 	name = EString
-	portee = INT
-	masse = FLOAT
-	vitesse = INT
-	energie = FLOAT
+	'scope' portee = INT
+	'mass' masse = FLOAT
+	'speed' vitesse = INT
+	'energy' energie = FLOAT
 ;
 	
 EString returns ecore::EString:
