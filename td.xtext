@@ -2,10 +2,12 @@ grammar fr.n7.Td with org.eclipse.xtext.common.Terminals
 
 generate td "http://www.n7.fr/Td"
 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
 TowerDefense returns TowerDefense:
 	{TowerDefense}
 	'TowerDefense'
-	name=STRING
+	name=EString
 	'{'
 		parties+=Partie+
 		elementsJeu+=ElementJeu*
@@ -14,7 +16,7 @@ TowerDefense returns TowerDefense:
 Partie returns Partie:
 	{Partie}
 	'Partie'
-	name=STRING
+	name=EString
 	'{'
 		terrain=[TerrainJeu]
 		listeNiveaux+=Niveau*
@@ -24,11 +26,22 @@ Partie returns Partie:
 Niveau returns Niveau:
 	{Niveau}
 	'Niveau'
-	name=STRING;
+	name=EString
+	'pause time' dureepause = FLOAT
+	'energy' energie = FLOAT
+	'mobile' nbmobiles = INT
+	;
 
 Vague returns Vague:
 	{Vague}
-	'Vague';
+	'Vague'
+	name=EString
+	energie=INT
+	'{'
+		mobile+=Mobile*
+		obstacles+=Obstacle*
+	'}'
+	;
 
 TerrainJeu returns TerrainJeu:
 	{TerrainJeu}
@@ -36,8 +49,14 @@ TerrainJeu returns TerrainJeu:
 	L=INT
 	C=INT
 	'{'
-		cases+=ElementJeu*
+		cases+=Case*
 	'}';
+	
+Case returns Case:
+	{Case}
+	'Case'
+	Nature = NatureTerrainType
+;
 
 ElementJeu returns ElementJeu:
 	Mobile | Obstacle | Projectile | NatureTerrain;
@@ -45,18 +64,58 @@ ElementJeu returns ElementJeu:
 Mobile returns Mobile:
 	{Mobile}
 	'Mobile'
+	name=EString
+	'{'
+		volume=FLOAT
+		energieMax= FLOAT
+		projectile+=Projectile*
+		vitesse=FLOAT
+		tactique=TACTIQUES
+		vague=Vague
+		position_dans_vague=INT
+		case_entree=[Case]
+		case_sortie=[Case]
+	'}'
+			
 ;
+
 
 Obstacle returns Obstacle:
 	{Obstacle}
 	'Obstacle'
+	name=EString
+	energieMax = FLOAT
+	projectile+=Projectile*
+	tactique = TACTIQUES
+	case_campement = [Case]   // contrainte ocl
 ;
 
-Projectile returns Projectile:
-	{Projectile}
-	'Projectile'
-;
+enum TACTIQUES: plusproche | plusfaible | plusfort;
+
+
+enum NatureTerrainType : entree | sortie | chemin | campement | decoration ;
+
 
 NatureTerrain returns NatureTerrain:
 	{NatureTerrain}
-	'NatureTerrain';
+	'NatureTerrain'
+	type = NatureTerrainType
+	
+	;
+	
+Projectile returns Projectile:
+	{Projectile}
+	'Projectile'
+	name = EString
+	'scope' portee = FLOAT
+	'mass' masse = FLOAT
+	'speed' vitesse = FLOAT
+	'energy' energie = FLOAT
+;
+	
+EString returns ecore::EString:
+	 STRING|ID
+;
+FLOAT returns ecore::EFloat:
+	INT'.'INT
+;	
