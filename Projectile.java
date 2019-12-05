@@ -19,8 +19,7 @@ public class Projectile implements ElementJeu{
 		this.vitesse = vitesse;
 		this.energie = energy;
 		
-		/*this.x = x;
-		this.y = y;*/
+
 	}
 	
 	public double detruire(Integer mx,Integer my,double menerg) throws DestructionException {
@@ -76,6 +75,16 @@ public class Projectile implements ElementJeu{
 	}
 	public void setEnergie(double energy) {
 		this.energie = energy;
+	}
+	
+	public String getinformation() {
+		
+		return ("Projectile : "+this.name+"\n" + 
+				"Portee : "+this.portee + "\n"
+				+"Masse : "+ this.masse + "\n"
+				+"Vitesse : "+ this.vitesse + "\n"
+				+ "Energie : "+ this.energie);
+
 	}
 
 	/** Méthode renvoyant l nom de l'élement de jeu.
