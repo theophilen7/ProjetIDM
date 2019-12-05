@@ -1,17 +1,18 @@
+package fr.n7.java;
 import java.lang.Exception;
 
-public class Projectile extends ElementJeu{
+public class Projectile implements ElementJeu{
 	
 	private String name ;
-	private Integer portee;
-	private Float masse;
-	private Float vitesse;
-	private Float energie;
-	private Integer x;
-	private Integer y;
+	private int portee;
+	private double masse;
+	private double vitesse;
+	private double energie;
+	private int x;
+	private int y;
 
 	
-	public Projectile(String name, Integer portee, Float masse, Float vitesse, Float energy) {
+	public Projectile(String name, int portee, double masse, double vitesse, double energy) {
 		this.name = name;
 		this.portee = portee;
 		this.masse = masse;
@@ -22,18 +23,10 @@ public class Projectile extends ElementJeu{
 		this.y = y;*/
 	}
 	
-	public Float detruire(Integer mx,Integer my,Float menerg) throws CibleException, DestructionException {
-		Integer dist ;
-		if(this.x == mx) {
-			dist = Math.abs(my-this.y);
-		}
-		else if (this.y == my) {
-			dist = Math.abs(mx-this.x);
-		}
+	public double detruire(Integer mx,Integer my,double menerg) throws DestructionException {
 		
-		else {
-			throw new CibleException("la cible n'est pas en face du projectile");
-		}
+		double dist = Math.abs(my-this.y) + Math.abs(mx-this.x) ;	
+
 		
 		if (dist<=this.portee) {
 			return (this.energie - menerg);
@@ -47,7 +40,7 @@ public class Projectile extends ElementJeu{
 		return x;
 	}
 
-	public void setX(Integer x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 
@@ -55,7 +48,7 @@ public class Projectile extends ElementJeu{
 		return y;
 	}
 
-	public void setY(Integer y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -63,26 +56,41 @@ public class Projectile extends ElementJeu{
 	public Integer getPortee() {
 		return portee;
 	}
-	public void setPortee(Integer portee) {
+	public void setPortee(int portee) {
 		this.portee = portee;
 	}
-	public Float getMasse() {
+	public double getMasse() {
 		return masse;
 	}
-	public void setMasse(Float masse) {
+	public void setMasse(double masse) {
 		this.masse = masse;
 	}
-	public Float getVitesse() {
+	public double getVitesse() {
 		return vitesse;
 	}
-	public void setVitesse(Float vitesse) {
+	public void setVitesse(double vitesse) {
 		this.vitesse = vitesse;
 	}
-	public Float getEnergie() {
+	public double getEnergie() {
 		return energie;
 	}
-	public void setEnergie(Float energy) {
+	public void setEnergie(double energy) {
 		this.energie = energy;
 	}
 
+	/** Méthode renvoyant l nom de l'élement de jeu.
+	 */
+	@Override
+	public String getName() {
+		return this.name;
+	}
+	
+	
+	/** Methode qui modifie le nom d'un élement de jeu.
+	 * @param nom
+	 */
+	@Override
+	public void setName(String nom) {
+		this.name = nom;
+	}
 }
