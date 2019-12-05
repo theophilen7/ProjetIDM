@@ -1,13 +1,14 @@
+package fr.n7.java;
 
 public class Niveau {
 
 	private String name;
-	private Float dureepause;
-	private Float energie;
-	private Integer nbmobiles;
+	private double dureepause;
+	private double energie;
+	private int nbmobiles;
 	
 
-	public Niveau(String name, Float dureepause, Float energie, Integer nbmobiles) {
+	public Niveau(String name, double dureepause, double energie, int nbmobiles) {
 		this.name = name;
 		this.dureepause = dureepause;
 		this.energie = energie;
@@ -20,22 +21,22 @@ public class Niveau {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Float getDureepause() {
+	public double getDureepause() {
 		return dureepause;
 	}
-	public void setDureepause(Float dureepause) {
+	public void setDureepause(double dureepause) {
 		this.dureepause = dureepause;
 	}
-	public Float getEnergie() {
+	public double getEnergie() {
 		return energie;
 	}
-	public void setEnergie(Float energie) {
+	public void setEnergie(double energie) {
 		this.energie = energie;
 	}
-	public Integer getNbmobiles() {
+	public int getNbmobiles() {
 		return nbmobiles;
 	}
-	public void setNbmobiles(Integer nbmobiles) {
+	public void setNbmobiles(int nbmobiles) {
 		this.nbmobiles = nbmobiles;
 	}
 
